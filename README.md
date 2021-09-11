@@ -1,4 +1,4 @@
-# senior_react_developer_flexcube
+# senior react developer flexcube
 
 This repository contains A react typescript application
 
@@ -84,7 +84,7 @@ Make sure all third-party integrations are still working as expected.
 
 ## Authors
 
-- **Dorny Muba** <dornymuba@gmail.com>
+- **Dorny Muba** <dornymuba2016@gmail.com>
 
 ## Meta
 
