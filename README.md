@@ -72,11 +72,15 @@ The project should now be available at http://localhost:3000
 
 ![login page](https://i.imgur.com/N2Kv2UV.png)
 
-## My thougths
+## Possible improvements
 
 - I definitely would have used the paid version of the API or something that was going to give me the ability to get a better formed response from the API and reduce calls and processing.
 
 - If I had more time I was going to adapt theme to the selected weather and create an overall better UI/UX.
+
+## Suggestions to improve the project and brief
+
+Make sure all third-party integrations are still working as expected.
 
 ## Authors
 
