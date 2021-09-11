@@ -70,7 +70,7 @@ yarn start
 
 The project should now be available at http://localhost:3000
 
-![login page](https://i.imgur.com/N2Kv2UV.png)
+![login page](https://dorny-s-files.s3.amazonaws.com/Screenshot+2021-09-11+at+19.18.26.png)
 
 ## Possible improvements
 
