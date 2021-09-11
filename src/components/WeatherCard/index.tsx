@@ -7,6 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { memo } from "react";
+import { calcTimestamp } from "../../utils";
 import Card from "../Card";
 
 type WeatherCardProps = {
@@ -18,7 +19,7 @@ type WeatherCardProps = {
 
 const WeatherCard = React.forwardRef<HTMLDivElement, WeatherCardProps>(
   ({ isLoaded, isCurrent, item, setCurrent }, ref): JSX.Element => {
-    const dayname = new Date(item?.dt * 1000).toLocaleDateString("en", {
+    const dayname = new Date(calcTimestamp(item?.dt)).toLocaleDateString("en", {
       weekday: "long",
     });
     const icon = item?.weather[0]?.icon;
