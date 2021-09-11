@@ -1,46 +1,89 @@
-# Getting Started with Create React App
+# senior_react_developer_flexcube
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains A react typescript application
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### `yarn start`
+### Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Before we get started, we're going to need to make sure we have a few things installed and available on our machine.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Node >= 12
 
-### `yarn test`
+##### MacOS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+curl "https://nodejs.org/dist/latest/node-${VERSION:-$(wget -qO- https://nodejs.org/dist/latest/ | sed -nE 's|.*>node-(.*)\.pkg</a>.*|\1|p')}.pkg" > "$HOME/Downloads/node-latest.pkg" && sudo installer -store -pkg "$HOME/Downloads/node-latest.pkg" -target "/"
+```
 
-### `yarn build`
+##### Other
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+See the installation guides available @ nodejs.org:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+https://nodejs.org/en/download/package-manager/
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Yarn
 
-### `yarn eject`
+```bash
+npm i -g yarn
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Installing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Below is a series of step by step instructions that tell you how to get a development env running.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Create a local clone of the repository
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+git clone git@github.com:dorny-mb/senior_react_developer_flexcube.git
+```
 
-## Learn More
+Enter the cloned repositories' directory
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+cd senior_react_developer_flexcube
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Install the projects dependencies
+
+```bash
+yarn
+```
+
+Create a `.env` file based on the [.env.example template](.env.example)
+
+Export the contents of the created `.env` file to the current terminal session.
+
+```bash
+set -o allexport; source .env; set +o allexport
+```
+
+Make sure the `REACT_APP_OPEN_WEATHER_MAP` var is set in the `.env` file
+
+Start the projects development server
+
+```bash
+yarn start
+```
+
+The project should now be available at http://localhost:3000
+
+![login page](https://i.imgur.com/N2Kv2UV.png)
+
+## My thougths
+
+- I definitely would have used the paid version of the API or something that was going to give me the ability to get a better formed response from the API and reduce calls and processing.
+
+- If I had more time I was going to adapt theme to the selected weather and create an overall better UI/UX.
+
+## Authors
+
+- **Dorny Muba** <dornymuba@gmail.com>
+
+## Meta
+
+| Version | Author                               | Date       |
+| ------- | ------------------------------------ | ---------- |
+| 0.0.1   | Dorny Muba <dornymuba2016@gmail.com> | 11/09/2021 |
