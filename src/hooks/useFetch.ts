@@ -1,5 +1,5 @@
 import axios, { Canceler, Method } from "axios";
-import { Reducer, useEffect, useReducer } from "react";
+import { Reducer, useEffect, useReducer, useRef } from "react";
 
 type StatusTypes = "idle" | "loading" | "loaded" | "network-error";
 type StateTypes = {
@@ -63,19 +63,29 @@ const useFetch = <T>(
     data: null,
     state: "idle",
   });
+  const isCurrent = useRef(true);
+  useEffect(() => {
+    return () => {
+      isCurrent.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     let cancel: Canceler;
+    let interval: NodeJS.Timeout;
 
-    dispatch({ type: "SET_STATUS", payload: "loading" });
-    cancel = Fetcher<T>(dispatch, method, url, params);
-    if (delay)
-      setInterval(() => {
-        cancel = Fetcher<T>(dispatch, method, url, params);
-      }, delay);
+    if (isCurrent.current) {
+      dispatch({ type: "SET_STATUS", payload: "loading" });
+      cancel = Fetcher<T>(dispatch, method, url, params);
+      if (delay)
+        interval = setInterval(() => {
+          cancel = Fetcher<T>(dispatch, method, url, params);
+        }, delay);
+    }
 
     return () => {
-      cancel();
+      if (interval) clearInterval(interval);
+      if (cancel) cancel();
     };
   }, [url, params, delay, method]);
 
