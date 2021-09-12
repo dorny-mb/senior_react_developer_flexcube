@@ -77,6 +77,7 @@ The project should now be available at http://localhost:3000
 - I definitely would have used the paid version of the API or something that was going to give me the ability to get a better formed response from the API and reduce calls and processing.
 
 - If I had more time I was going to adapt theme to the selected weather and create an overall better UI/UX.
+- Finally, I was going to extract more info about cities from an API or something like that.
 
 ## Suggestions to improve the project and brief
 

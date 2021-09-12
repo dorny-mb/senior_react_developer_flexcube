@@ -57,6 +57,7 @@ const Home: React.FC = () => {
   const forecastLoading = forecastState === "loading";
   const maxtrixLoading = state === "loading";
   const error = forecastState === "network-error" || state === "network-error";
+
   const [current, setCurrent] = useState<any>();
   const forecast = res as any;
   const data = dataForMatrix as any;
