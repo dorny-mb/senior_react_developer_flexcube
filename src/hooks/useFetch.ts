@@ -1,4 +1,4 @@
-import axios, { Canceler } from "axios";
+import axios, { Canceler, Method } from "axios";
 import { Reducer, useEffect, useReducer } from "react";
 
 type StatusTypes = "idle" | "loading" | "loaded" | "network-error";
@@ -30,15 +30,15 @@ const stateReducer: Reducer<StateTypes, ActionTypes> = (
 
 const Fetcher = <T>(
   dispatch: React.Dispatch<ActionTypes>,
+  method: Method = "GET",
   url: string,
-
   params?: T
 ): Canceler => {
   let cancel: Canceler = () => null;
   (async () => {
     try {
       const { data } = await axios({
-        method: "GET",
+        method,
         url,
         params: { ...params },
         cancelToken: new axios.CancelToken((c) => (cancel = c)),
@@ -53,7 +53,12 @@ const Fetcher = <T>(
   return cancel;
 };
 
-const useFetch = <T>(url: string, params?: T, delay?: number) => {
+const useFetch = <T>(
+  url: string,
+  method?: Method,
+  params?: T,
+  delay?: number
+) => {
   const [state, dispatch] = useReducer(stateReducer, {
     data: null,
     state: "idle",
@@ -63,16 +68,16 @@ const useFetch = <T>(url: string, params?: T, delay?: number) => {
     let cancel: Canceler;
 
     dispatch({ type: "SET_STATUS", payload: "loading" });
-    cancel = Fetcher<T>(dispatch, url, params);
+    cancel = Fetcher<T>(dispatch, method, url, params);
     if (delay)
       setInterval(() => {
-        cancel = Fetcher<T>(dispatch, url, params);
+        cancel = Fetcher<T>(dispatch, method, url, params);
       }, delay);
 
     return () => {
       cancel();
     };
-  }, [url, params, delay]);
+  }, [url, params, delay, method]);
 
   return state;
 };

@@ -1,13 +1,21 @@
 import { Flex, Container, useMediaQuery } from "@chakra-ui/react";
-import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
+import React, {
+  ChangeEvent,
+  Suspense,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import moment from "moment";
 
 import { filterOptions } from "../../data/index";
 import { useFetch } from "../../hooks";
 import { OPEN_WEATHER_MAP_API_KEY, REFETCH_DELAY_TIME } from "../../constants";
-import { EmptyHandler, MatrixBoard, Nav, WeatherCard } from "../../components";
-
+import { CardLoader, EmptyHandler, MatrixBoard, Nav } from "../../components";
 import { PageWrapper } from "./styles";
+const WeatherCard = React.lazy(
+  () => import("../../components/WeatherCard/index")
+);
 
 type ParamsType = {
   APPID: string;
@@ -36,11 +44,13 @@ const Home: React.FC = () => {
 
   const { data: res, state: forecastState } = useFetch<ParamsType>(
     "https://api.openweathermap.org/data/2.5/onecall",
+    "GET",
     params,
     REFETCH_DELAY_TIME
   );
   const { data: dataForMatrix, state } = useFetch<ParamsType>(
     "https://api.openweathermap.org/data/2.5/forecast",
+    "GET",
     params,
     REFETCH_DELAY_TIME
   );
@@ -114,15 +124,16 @@ const Home: React.FC = () => {
           isLoaded={!forecastLoading}
         />
 
-        <Flex my={8} flexDir={isTabletOrMobile ? "column" : "row"}>
+        <Flex my={8} minH={200} flexDir={isTabletOrMobile ? "column" : "row"}>
           {forecast?.daily?.slice(0, 5)?.map((item: any, idx: number) => (
-            <WeatherCard
-              isLoaded={!forecastLoading}
-              item={item}
-              isCurrent={item?.dt === current?.dt}
-              setCurrent={setCurrent}
-              key={idx}
-            />
+            <Suspense key={idx} fallback={<CardLoader />}>
+              <WeatherCard
+                isLoaded={!forecastLoading}
+                item={item}
+                isCurrent={item?.dt === current?.dt}
+                setCurrent={setCurrent}
+              />
+            </Suspense>
           ))}
         </Flex>
         <MatrixBoard
