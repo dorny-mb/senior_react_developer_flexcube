@@ -13,9 +13,7 @@ import { useFetch } from "../../hooks";
 import { OPEN_WEATHER_MAP_API_KEY, REFETCH_DELAY_TIME } from "../../constants";
 import { CardLoader, EmptyHandler, MatrixBoard, Nav } from "../../components";
 import { PageWrapper } from "./styles";
-const WeatherCard = React.lazy(
-  () => import("../../components/WeatherCard/index")
-);
+const WeatherCard = React.lazy(() => import("../../components/WeatherCard"));
 
 type ParamsType = {
   APPID: string;
@@ -85,9 +83,8 @@ const Home: React.FC = () => {
   );
 
   useEffect(() => {
-    if (current) return;
     setCurrent(() => (forecast ? forecast.daily[0] : null));
-  }, [forecast, current]);
+  }, [forecast, filter]);
 
   useEffect(() => {
     if (currentMatrix)
